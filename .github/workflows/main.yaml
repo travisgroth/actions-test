@@ -1,4 +1,5 @@
 name: Default
+runs-on: ubuntu
 on:
   push:
     branches:
