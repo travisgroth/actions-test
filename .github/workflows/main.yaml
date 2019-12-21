@@ -1,5 +1,4 @@
 name: Default
-runs-on: ubuntu
 on:
   push:
     branches:
@@ -9,6 +8,7 @@ on:
       - master
 jobs:
   build:
+    runs-on: ubuntu-latest
     container:
       image: "golang:1.13"
     steps:
