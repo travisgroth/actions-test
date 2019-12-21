@@ -1,0 +1,17 @@
+name: Default
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    container:
+      image: "golang:1.13"
+    steps:
+      - name: install go-task
+        run: curl -sL https://taskfile.dev/install.sh | sh
+      - name: show env
+        run: task --version && go --version
