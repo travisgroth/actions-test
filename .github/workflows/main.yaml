@@ -24,6 +24,7 @@ jobs:
       - run: ls -lh $DOCKER_CONFIG
       - run: echo $HOME
       - run: touch $HOME/foo
-      - run: touch ./_temp/foo
-      - run: ls -lh $HOME/foo ./_temp/foo
+      - run: touch $HOME/work/_temp/foo
+      - run: ls -lh $HOME/foo $HOME/work/_temp/foo
       - run: set
+      - run: pwd
