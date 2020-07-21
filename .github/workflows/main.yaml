@@ -1,0 +1,27 @@
+name: Default
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Unshallow
+        run: git fetch --prune --unshallow
+
+      - name: Set up Docker
+        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
+      - uses: azure/docker-login@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - run: echo $DOCKER_CONFIG
+      - run: ls -lh $DOCKER_CONFIG
+      - run: echo $HOME
+      - run: touch $HOME/foo
+      - run: ls -lh $HOME/foo
