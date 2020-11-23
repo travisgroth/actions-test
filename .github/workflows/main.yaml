@@ -26,7 +26,7 @@ jobs:
           echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
 
       - name: Upload packages to bintray stable channel
-        if: "contains('v0.1.0-rc1', 'rc') == 0"
+        if: "contains('v0.1.0', 'rc') == 0"
         run: |
           echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
 
