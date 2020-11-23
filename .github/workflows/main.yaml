@@ -20,6 +20,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Upload packages to bintray beta channel
+        if: "contains('v0.1.0-rc1', 'rc') == 1"
+        run: |
+          echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
+
+      - name: Upload packages to bintray stable channel
+        if: "contains('v0.1.0-rc1', 'rc') == 0"
+        run: |
+          echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
+
       - run: echo $DOCKER_CONFIG
       - run: ls -lh $DOCKER_CONFIG
       - run: echo $HOME
