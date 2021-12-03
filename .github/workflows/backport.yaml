@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Backport
     steps:
-      - name: Generate token
-        id: generate_token
-        uses: travisgroth/github-app-token@retain_labels
-        with:
-          app_id: ${{ secrets.BACKPORT_APP_APPID }}
-          private_key: ${{ secrets.BACKPORT_APP_PRIVATE_KEY }}
+      # - name: Generate token
+      #   id: generate_token
+      #   uses: travisgroth/github-app-token@retain_labels
+      #   with:
+      #     app_id: ${{ secrets.BACKPORT_APP_APPID }}
+      #     private_key: ${{ secrets.BACKPORT_APP_PRIVATE_KEY }}
 
       - name: Backport
-        uses: tibdex/backport@v1
+        uses: travisgroth/backport@retain_labels
         with:
-          github_token: ${{ steps.generate_token.outputs.token }}
+          # github_token: ${{ steps.generate_token.outputs.token }}
           title_template: "{{originalTitle}}"
