@@ -23,4 +23,4 @@ jobs:
           # github_token: ${{ steps.generate_token.outputs.token }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           title_template: "{{originalTitle}}"
-          keep_original_labels: true
+          copy_original_labels: true
