@@ -1,40 +1,40 @@
-name: Default
-on:
-  push:
-  pull_request:
+# name: Default
+# on:
+#   push:
+#   pull_request:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Unshallow
-        run: git fetch --prune --unshallow
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#       - name: Unshallow
+#         run: git fetch --prune --unshallow
 
-      - name: Set up Docker
-        run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+#       - name: Set up Docker
+#         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
-      - uses: azure/docker-login@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#       - uses: azure/docker-login@v1
+#         with:
+#           username: ${{ secrets.DOCKERHUB_USER }}
+#           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Upload packages to bintray beta channel
-        if: "contains('v0.1.0-rc1', 'rc') == 1"
-        run: |
-          echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
+#       - name: Upload packages to bintray beta channel
+#         if: "contains('v0.1.0-rc1', 'rc') == 1"
+#         run: |
+#           echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
 
-      - name: Upload packages to bintray stable channel
-        if: "contains('v0.1.0', 'rc') == 0"
-        run: |
-          echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
+#       - name: Upload packages to bintray stable channel
+#         if: "contains('v0.1.0', 'rc') == 0"
+#         run: |
+#           echo jfrog bt upload --publish dist/pomerium-${VERSION}-1.x86_64.rpm pomerium/enterprise-yum/pomerium/${VERSION} centos/8/x86_64/beta/
 
-      - run: echo $DOCKER_CONFIG
-      - run: ls -lh $DOCKER_CONFIG
-      - run: echo $HOME
-      - run: touch $HOME/foo
-      - run: touch $HOME/work/_temp/foo
-      - run: ls -lh $HOME/foo $HOME/work/_temp/foo
-      - run: set
-      - run: pwd
+#       - run: echo $DOCKER_CONFIG
+#       - run: ls -lh $DOCKER_CONFIG
+#       - run: echo $HOME
+#       - run: touch $HOME/foo
+#       - run: touch $HOME/work/_temp/foo
+#       - run: ls -lh $HOME/foo $HOME/work/_temp/foo
+#       - run: set
+#       - run: pwd
